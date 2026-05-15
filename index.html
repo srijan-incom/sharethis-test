@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue 3 Hello World</title>
+
+  <meta property="og:url" content="https://www.manminder.incomrealestate.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Test title">
+  <meta property="og:description" content="Check this out!">
+  <meta property="og:image" content="https://storage.sub-ca.incomrealestate.com/6a062d0f2f60cc990ddb074e.jpeg">
+  <meta property="og:site_name" content="manminder">
+
+  <!-- Vue 3 via CDN -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 100px;
+      background: #f0f2f5;
+    }
+
+    #app {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #42b883;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background: #42b883;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .st-custom-button[data-network] {
+      color: #fff;
+      border-radius: 4px;
+      width: 200px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #95d03a;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div ref="elem"></div>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.manminder.incomrealestate.com%2F"
+      target="_blank" class="st-custom-button" style="text-decoration: none;">
+      <div class="st-btn-content">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#ffffff"
+          style="margin-right: 10px;">
+          <path
+            d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z" />
+        </svg>
+        <span>Share on Facebook</span>
+      </div>
+    </a>
+    <div ref="sharethisMore" class="st-custom-button btn-custom-sharethis share-sharethis" data-network="sharethis">
+      Share</div>
+  </div>
+
+  <script>
+    const { createApp } = Vue
+
+    createApp({
+      data() {
+        return {
+          message: 'Hello Vue 3! 👋',
+        }
+      },
+      mounted() {
+        this.initShareThis();
+        this.$nextTick(() => {
+          this.setShareAttributes();
+        });
+      },
+      methods: {
+        setShareAttributes() {
+          this.$refs.sharethisMore.setAttribute("data-image", 'https://storage.sub-ca.incomrealestate.com/6a062d0f2f60cc990ddb074e.jpeg');
+          this.$refs.sharethisMore.setAttribute("data-url", "https://www.manminder.incomrealestate.com/");
+          this.$refs.sharethisMore.setAttribute("data-title", "Test title");
+        },
+        initShareThis: function () {
+          var self = this;
+          if (typeof window.__sharethis__ != "undefined") {
+            delete window.__sharethis__;
+          }
+          var script = document.createElement('script');
+          script.onload = function () {
+            st.loader['share-all'] = function (config) {
+              var $backdrop, $button, $buttons, $close, $el, common_css, count_url, css, description, html, i, id, image, j, len, len1, logo_link, message, network, network_css, ref, ref1, share_url, src, title, url, username;
+              if (config == null) {
+                config = {};
+              }
+              count_url = config.count_url, share_url = config.share_url, url = config.url, description = config.description, image = config.image, message = config.message, network = config.network, title = config.title, username = config.username;
+              ref = st.newElement(), $el = ref.$el, id = ref.id;
+              st.addClass($el, 'st-hidden');
+              common_css = "body.st-body-no-scroll {\n  bottom: 0;\n  left: 0;\n  overflow: hidden;\n  position: fixed;\n  right: 0;\n  top: 0;\n}\n#" + id + " {\n  " + st.FONT_FAMILY + "\n  " + (st.TRANSITION()) + "\n  height: 100%;\n  left: 0;\n  opacity: 1;\n  position: fixed;\n  top: 0;\n  width: 100%;\n  z-index: 99999;\n}\n#" + id + ".st-hidden {\n  opacity: 0;\n  top: 100%;\n}\n#" + id + " .st-backdrop {\n  background: rgba(0, 0, 0, 0.8);\n  bottom: 0;\n  left: 0;\n  position: absolute;\n  right: 0;\n  top: 0;\n  z-index: 10;\n}\n#" + id + " .st-btns {\n  bottom: 56px;\n  left: 0;\n  margin: 100px auto 0;\n  max-width: 90%;\n  position: absolute;\n  right: 0;\n  text-align: center;\n  top: 10px;\n  z-index: 20;\n  overflow-y: auto;\n}\n#" + id + " .st-logo {\n  background: #4c4c4c;\n  bottom: 0;\n  cursor: pointer;\n  padding: 20px;\n  position: absolute;\n  text-align: center;\n  width: 100%;\n  z-index: 30;\n}\n#" + id + " .st-close {\n  " + (st.BORDER_RADIUS(28)) + "\n  " + st.BORDER_BOX + "\n  background: #999;\n  bottom: 28px;\n  color: #fff;\n  cursor: pointer;\n  font-size: 36px;\n  height: 56px;\n  line-height: 28px;\n  padding: 10px;\n  position: absolute;\n  right: 14px;\n  width: 56px;\n  z-index: 40;\n}\n#" + id + " .st-disclaimer {\n  bottom: 72px;\n  color: white;\n  font-size: 12px;\n  left: 50%;\n  position: absolute;\n  transform: translate(-50%, 0);\n  z-index: 30;\n}\n#" + id + " .st-close > img {\n  height: 40px;\n  width: 40px;\n}\n#" + id + " .st-btn {\n  " + (st.BORDER_RADIUS(4)) + "\n  " + st.BORDER_BOX + "\n  " + (st.TRANSITION()) + "\n  color: white;\n  cursor: pointer;\n  display: inline-block;\n  font-size: 12px;\n  font-weight: 400;\n  height: 48px;\n  line-height: 30px;\n  margin: 4px;\n  opacity: 1;\n  overflow: hidden;\n  padding: 8px 12px;\n  position: relative;\n  text-align: left;\n  top: 0;\n  vertical-align: top;\n  width: 148px;\n}\n#" + id + " .st-btn::before {\n  " + (st.BORDER_RADIUS(4)) + "\n  " + (st.TRANSITION()) + "\n  background: #fff;\n  content: '';\n  height: 100%;\n  left: 0;\n  opacity: 0;\n  position: absolute;\n  top: 0;\n  width: 100%;\n}\n#" + id + " .st-btn:hover::before {\n  opacity: .2;\n}\n#" + id + " .st-btn > svg {\n  display: inline-block;\n  height: 20px;\n  margin-top: 6px;\n  vertical-align: top;\n  width: 20px;\n}\n#" + id + " .st-btn > img {\n  display: inline-block;\n  height: 20px;\n  margin-top: 6px;\n  vertical-align: top;\n  width: 20px;\n}\n#" + id + " .st-btn > span {\n  display: inline-block;\n  letter-spacing: 0.5px;\n  text-align: center;\n  vertical-align: top;\n  width: 96px;\n}\n@media(max-width: 1200px) {\n  #" + id + " .st-btns {\n    margin-top: 50px;\n  }\n}\n@media(max-width: 800px) {\n  #" + id + " .st-btns {\n    margin: 0 auto;\n    max-width: 100%;\n    padding: 32px 10px 50px;\n  }\n  #" + id + " .st-btn {\n    width: 130px;\n  }\n  #" + id + " .st-btn > span {\n    width: 74px;\n  }\n  #" + id + " .st-disclaimer {\n    background: #000;\n    bottom: 44px;\n    font-size: 10px;\n    padding: 8px;\n    text-align: center;\n    width: 100%\n  }\n}";
+              network_css = ((function () {
+                var i, len, ref1, results;
+                ref1 = st.shareNetworks;
+                results = [];
+                for (i = 0, len = ref1.length; i < len; i++) {
+                  network = ref1[i];
+                  results.push("#" + id + " .st-btn[data-network='" + network + "'] {\n  background-color: " + st.COLORS[network] + ";\n}");
+                }
+                return results;
+              })()).join('\n');
+              css = common_css;
+              css += network_css;
+              st.css(css);
+              html = "<div class='st-backdrop'></div>";
+              html += "<div class='st-btns'>";
+              ref1 = st.shareNetworks;
+              for (i = 0, len = ref1.length; i < len; i++) {
+                network = ref1[i];
+                if (network === 'sharethis') {
+                  continue;
+                }
+                if (!st.mobile && (network === 'sms')) {
+                  continue;
+                }
+                html += "<div class='st-btn' data-network='" + network + "'>\n  " + st.ICONS[network] + "\n  <span>" + network + "</span>\n</div>";
+              }
+              html += "</div>";
+              src = 'https://platform-cdn.sharethis.com/img/share-this-logo%402x.png';
+              logo_link = "https://sharethis.com/platform/share-buttons?" + st.qs({
+                utm_source: "share-buttons",
+                utm_medium: "referral",
+                utm_campaign: "sharethis-button-referral"
+              });
+              html += "<div class=\"st-logo\">\n  <a href=\"" + logo_link + "\" target=\"_blank\">\n    <img height=\"16\" width=\"96\" src=\"" + src + "\">\n  </a>\n</div>";
+              html += "<div class=\"st-close\">\n  " + st.ICONS['close'] + "\n</div>";
+              html += "<div class=\"st-disclaimer\">\n  Third-party platform trademarks and logos appearing here are owned by the\n  respective third parties, link to those referenced platforms, and are not\n  affiliated with ShareThis.\n</div>";
+              $el.innerHTML = html;
+              $backdrop = $el.querySelector('.st-backdrop');
+              $buttons = $el.querySelectorAll('.st-btn');
+              $close = $el.querySelector('.st-close');
+              st.addEventListener($backdrop, 'click', function () {
+                return st.close($el);
+              });
+              st.addEventListener($close, 'click', function () {
+                return st.close($el);
+              });
+              st.addEventListener(document, 'keydown', function (e) {
+                if (st.isEsc(e)) {
+                  return st.close($el);
+                }
+              });
+
+              for (j = 0, len1 = $buttons.length; j < len1; j++) {
+                $button = $buttons[j];
+                st.addEventListener($button, 'click', function () {
+                  st.close($el);
+
+                  console.log('---------------');
+
+                  return st.share({
+                    description: description,
+                    image: image,
+                    network: this.getAttribute('data-network'),
+                    share_url: share_url,
+                    title: title,
+                    url: url,
+                    username: username,
+                    subject: window.document.title
+                  });
+                });
+              }
+
+              // 2. PLACE THE NEW FIX HERE (After the loop)
+              $el.addEventListener('click', function (e) {
+                // Find if the clicked element (or its parent) is the Facebook button
+                const fbBtn = e.target.closest('.st-btn[data-network="facebook"]');
+
+                if (fbBtn) {
+                  // Check if we are on mobile
+                  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+                  if (isMobile || true) {
+                    // 1. Stop the ShareThis library from running its broken logic
+                    e.stopImmediatePropagation();
+                    e.preventDefault();
+
+                    // 2. Close the ShareThis overlay
+                    st.close($el);
+
+                    // 3. Define the share URL (Ensure this matches your meta tags)
+                    const u = "https://www.manminder.incomrealestate.com/";
+                    const t = "Test title";
+                    const fbUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(u) + '&t=' + encodeURIComponent(t);
+                    window.open('http://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(u) + '&t=' + encodeURIComponent(t), 'sharer', 'toolbar=0,status=0,width=626,height=436')
+                    // 4. Use window.location to force the mobile browser to hand off to the app correctly
+                    // window.location.href = fbUrl;
+                  }
+                }
+              }, true);
+
+              return setTimeout((function () {
+                st.removeClass($el, 'st-hidden');
+                return st.addClass(document.body, 'st-body-no-scroll');
+              }), 10);
+            };
+            self.sharethisLoaded = true;
+          }
+          script.async = true;
+          script.src = 'https://platform-api.sharethis.com/js/sharethis.js#property=642b140b2e43270019720c43&product=sop';
+          this.$refs.elem.appendChild(script);
+        }
+      }
+    }).mount('#app')
+  </script>
+</body>
+
+</html>
