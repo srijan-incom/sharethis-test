@@ -181,11 +181,17 @@
                   st.close($el);
 
                   // HARDCODED VALUE MATCHING THE OG HEAD METAS
-                  const targetUrl = "https://srijan-incom.github.io/sharethis-test/";
-                  const fbSharerUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(targetUrl);
-
-                  // Forces fallback browser handoff execution cleanly
-                  window.location.href = fbSharerUrl;
+                  const appId = '1320627116742027';
+                  const shareUrl = 'https://srijan-incom.github.io/sharethis-test/';
+                  const redirectUri = window.location.href;
+ 
+                  const fbDialogUrl = 'https://www.facebook.com/dialog/share?' +
+                    'app_id=' + appId +
+                    '&display=popup' +
+                    '&href=' + encodeURIComponent(shareUrl) +
+                    '&redirect_uri=' + encodeURIComponent(redirectUri);
+ 
+                  window.location.href = fbDialogUrl;
                 }
               }, true);
 
