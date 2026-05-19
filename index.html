@@ -6,14 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vue 3 Hello World</title>
 
-  <meta property="og:url" content="https://www.manminder.incomrealestate.com/">
+  <meta property="og:url" content="https://srijan-incom.github.io/sharethis-test/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Test title">
   <meta property="og:description" content="Check this out!">
   <meta property="og:image" content="https://storage.sub-ca.incomrealestate.com/6a062d0f2f60cc990ddb074e.jpeg">
   <meta property="og:site_name" content="manminder">
 
-  <!-- Vue 3 via CDN -->
   <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
 
   <style>
@@ -46,16 +45,16 @@
     }
 
     .st-custom-button[data-network] {
-    color: #fff;
-    border-radius: 4px;
-    width:200px;
-    height:50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #95d03a;
-    cursor: pointer;
-}
+      color: #fff;
+      border-radius: 4px;
+      width: 200px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #95d03a;
+      cursor: pointer;
+    }
   </style>
 </head>
 
@@ -153,14 +152,11 @@
                   return st.close($el);
                 }
               });
-              
+
               for (j = 0, len1 = $buttons.length; j < len1; j++) {
                 $button = $buttons[j];
                 st.addEventListener($button, 'click', function () {
                   st.close($el);
-
-                  console.log('---------------');
-
                   return st.share({
                     description: description,
                     image: image,
@@ -174,31 +170,22 @@
                 });
               }
 
-              // 2. PLACE THE NEW FIX HERE (After the loop)
+              // OVERRIDE: Targets the custom rendered inner container 
               $el.addEventListener('click', function (e) {
-                // Find if the clicked element (or its parent) is the Facebook button
                 const fbBtn = e.target.closest('.st-btn[data-network="facebook"]');
 
                 if (fbBtn) {
-                  // Check if we are on mobile
-                  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+                  // Capture phase prevention stops script race-conditions on mobile
+                  e.stopImmediatePropagation();
+                  e.preventDefault();
+                  st.close($el);
 
-                  if (isMobile || true) {
-                    // 1. Stop the ShareThis library from running its broken logic
-                    e.stopImmediatePropagation();
-                    e.preventDefault();
+                  // HARDCODED VALUE MATCHING THE OG HEAD METAS
+                  const targetUrl = "https://srijan-incom.github.io/sharethis-test/";
+                  const fbSharerUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(targetUrl);
 
-                    // 2. Close the ShareThis overlay
-                    st.close($el);
-
-                    // 3. Define the share URL (Ensure this matches your meta tags)
-                    const u = window.location.href;
-                    const t = "Test title";
-                    const fbUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(u) + '&t=' + encodeURIComponent(t);
-
-                    // 4. Use window.location to force the mobile browser to hand off to the app correctly
-                    window.location.href = fbUrl;
-                  }
+                  // Forces fallback browser handoff execution cleanly
+                  window.location.href = fbSharerUrl;
                 }
               }, true);
 
