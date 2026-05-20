@@ -182,15 +182,14 @@
                   st.close($el);
 
                   // HARDCODED VALUE MATCHING THE OG HEAD METAS
-                  const appId = '27155338150792422';
                   const shareUrl = 'https://srijan-incom.github.io/sharethis-test/';
                   const redirectUri = window.location.href;
  
                   const fbDialogUrl = 'https://www.facebook.com/dialog/share?' +
-                    'app_id=' + appId +
                     '&display=popup' +
                     '&href=' + encodeURIComponent(shareUrl) +
-                    '&redirect_uri=' + encodeURIComponent(redirectUri);
+                    '&redirect_uri=' + encodeURIComponent(redirectUri) +
+                    '&m2w=1';
  
                   window.location.href = fbDialogUrl;
                 }
